@@ -436,7 +436,8 @@ class Patient(XML):
             Unknown field with tag {self.nsstrip(field.tag)}"""
             name = self.find('name', field).text
             data = self.find('data', field)
-            data = self._type_converter[data.get('dataType')](data.text)
+            convert = self._type_converter.get(data.get('dataType'), self._type_converter[None])
+            data = convert(data.text)
             ans[name] = data
         return ans
 
