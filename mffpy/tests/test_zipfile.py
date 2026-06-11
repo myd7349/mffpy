@@ -16,7 +16,7 @@ from os.path import join, dirname
 
 import pytest
 
-from ..zipfile import ZipFile
+from ..zip_file import ZipFile
 from zipfile import ZipFile as stlZipFile
 
 examples_path = join(dirname(__file__), '..', '..', 'examples')

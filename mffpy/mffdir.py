@@ -18,7 +18,7 @@ from os.path import join, exists, splitext, basename, isdir
 from collections import defaultdict, namedtuple
 from typing import Dict, List, Tuple, IO, Optional
 
-from . import zipfile
+from . import zip_file
 
 
 SignalAndInfo: Tuple[IO[bytes], str] = namedtuple(
@@ -149,7 +149,7 @@ class ZippedMFFDirectory(MFFDirBase):
     """
 
     def __init__(self, filename: str):
-        self.root = zipfile.ZipFile(filename)
+        self.root = zip_file.ZipFile(filename)
         super().__init__(filename)
 
     def __del__(self):
@@ -179,7 +179,7 @@ def get_directory(filename: str) -> MFFDirBase:
     assert exists(filename), f"'{filename}' does not exist"
     if isdir(filename):
         return MFFDirectory(filename)
-    elif zipfile.is_zipfile(filename):
+    elif zip_file.is_zipfile(filename):
         return ZippedMFFDirectory(filename)
     else:
         raise ValueError(f"'{filename}' is likely a corrupted zip file")
